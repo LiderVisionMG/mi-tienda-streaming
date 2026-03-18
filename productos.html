@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Productos - Streaming Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .price {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">Streaming Store</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Volver al inicio</a></li>
+      </ul>
+      <button class="btn btn-success ms-3" onclick="checkout()">🛒 Carrito</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <h1 class="mb-4">Selecciona tus plataformas</h1>
+
+  <!-- Netflix -->
+  <div id="netflix" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Netflix</h5>
+      <select class="form-select w-auto d-inline" onchange="updateCart('Netflix', this)">
+        <option value="">Selecciona...</option>
+        <option value="Cuenta compartida - $5">Cuenta compartida - $5</option>
+        <option value="Cuenta completa - $10">Cuenta completa - $10</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Disney+ -->
+  <div id="disney" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Disney+</h5>
+      <select class="form-select w-auto d-inline" onchange="updateCart('Disney+', this)">
+        <option value="">Selecciona...</option>
+        <option value="Cuenta compartida - $4">Cuenta compartida - $4</option>
+        <option value="Cuenta completa - $8">Cuenta completa - $8</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- HBO Max -->
+  <div id="hbo" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">HBO Max</h5>
+      <select class="form-select w-auto d-inline" onchange="updateCart('HBO Max', this)">
+        <option value="">Selecciona...</option>
+        <option value="Cuenta compartida - $6">Cuenta compartida - $6</option>
+        <option value="Cuenta completa - $12">Cuenta completa - $12</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Spotify -->
+  <div id="spotify" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Spotify</h5>
+      <select class="form-select w-auto d-inline" onchange="updateCart('Spotify', this)">
+        <option value="">Selecciona...</option>
+        <option value="Cuenta compartida - $3">Cuenta compartida - $3</option>
+        <option value="Cuenta completa - $6">Cuenta completa - $6</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  let cart = {};
+
+  function updateCart(platform, select) {
+    if (select.value) {
+      cart[platform] = select.value;
+    } else {
+      delete cart[platform];
+    }
+  }
+
+  function checkout() {
+    let message = "Hola, quiero comprar:\n";
+    for (let platform in cart) {
+      message += platform + ": " + cart[platform] + "\n";
+    }
+    // Cambia el número por el tuyo en formato internacional
+    let url = "https://wa.me/573001234567?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
+  }
+</script>
+</body>
+</html>
